@@ -1,0 +1,1468 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Taller de Imputación para Series de Tiempo &#8212; My sample book</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Notebooks with MyST Markdown" href="markdown-notebooks.html" />
+    <link rel="prev" title="Markdown Files" href="markdown.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.png" class="logo__image only-light" alt="My sample book - Home"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="My sample book - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Introducción a la Imputación de Series de Tiempo
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="markdown.html">Markdown Files</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Taller de Imputación para Series de Tiempo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="markdown-notebooks.html">Notebooks with MyST Markdown</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fnotebooks.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/notebooks.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Taller de Imputación para Series de Tiempo</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#importar-librerias">Importar Librerías</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lectura-de-datos">Lectura de Datos</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variables-numericas">Variables Númericas</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#valores-nulos">Valores Nulos</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#grafico-de-barras-de-los-valores-nulos">Gráfico de Barras de los Valores Nulos</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodos-de-imputacion-para-series-de-tiempo-investigacion">Métodos de imputación para series de Tiempo (Investigación)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#metodos-simples-basados-en-vecindad">1. Métodos Simples (Basados en Vecindad)</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#forward-fill-locf-last-observation-carried-forward"><strong>Forward Fill (LOCF - Last Observation Carried Forward)</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#backward-fill-nocb-next-observation-carried-backward"><strong>Backward Fill (NOCB - Next Observation Carried Backward)</strong></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#metodos-de-interpolacion">2. Métodos de Interpolación</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#interpolacion-lineal"><strong>Interpolación Lineal</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#interpolacion-polinomial"><strong>Interpolación Polinomial</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#interpolacion-por-spline-cubico"><strong>Interpolación por Spline Cúbico</strong></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#metodos-estadisticos-y-basados-en-modelos">3. Métodos Estadísticos y basados en Modelos</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#imputacion-con-media-mediana-movil"><strong>Imputación con Media/Mediana Móvil</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#interpolacion-estacional"><strong>Interpolación Estacional</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#imputacion-basada-en-modelos-arima-prophet-etc"><strong>Imputación basada en Modelos (ARIMA, Prophet, etc.)</strong></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion"><strong>Conclusión</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1"><strong>Forward Fill (LOCF - Last Observation Carried Forward)</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2"><strong>Backward Fill (NOCB - Next Observation Carried Backward)</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3"><strong>Interpolación Lineal</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#forward-fill-y-backward-fill-combinados"><strong>Forward Fill y Backward Fill Combinados</strong></a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="taller-de-imputacion-para-series-de-tiempo">
+<h1>Taller de Imputación para Series de Tiempo<a class="headerlink" href="#taller-de-imputacion-para-series-de-tiempo" title="Link to this heading">#</a></h1>
+<section id="importar-librerias">
+<h2>Importar Librerías<a class="headerlink" href="#importar-librerias" title="Link to this heading">#</a></h2>
+<p>Se importan las librerías esenciales para facilitar el análisis que abarca la carga de datos, la evaluación estadística, la visualización, la transformación de datos, la fusión y la unión.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">plotly</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: plotly in c:\users\david\miniconda3\envs\ml_venv\lib\site-packages (6.3.0)
+Requirement already satisfied: narwhals&gt;=1.15.1 in c:\users\david\miniconda3\envs\ml_venv\lib\site-packages (from plotly) (2.3.0)
+Requirement already satisfied: packaging in c:\users\david\miniconda3\envs\ml_venv\lib\site-packages (from plotly) (23.1)
+Note: you may need to restart the kernel to use updated packages.
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">plotly.graph_objects</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">go</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="kn">import</span> <span class="n">shapiro</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="kn">import</span> <span class="n">ks_2samp</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.impute</span><span class="w"> </span><span class="kn">import</span> <span class="n">KNNImputer</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.linear_model</span><span class="w"> </span><span class="kn">import</span> <span class="n">LinearRegression</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.impute</span><span class="w"> </span><span class="kn">import</span> <span class="n">SimpleImputer</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="lectura-de-datos">
+<h2>Lectura de Datos<a class="headerlink" href="#lectura-de-datos" title="Link to this heading">#</a></h2>
+<p>La base de datos fue importada directamente desde GitHub utilizando pandas, facilitando el acceso a los datos sin necesidad de descargas manuales intermedias.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">url2</span> <span class="o">=</span> <span class="s2">&quot;https://raw.githubusercontent.com/Kalbam/Datos/refs/heads/main/ts_imputacion_multivariada_masNA.csv&quot;</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">url2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Se muestran las primeras filas del DataFrame.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>fecha</th>
+      <th>temperatura</th>
+      <th>humedad</th>
+      <th>lluvia_mm</th>
+      <th>precio</th>
+      <th>ventas</th>
+      <th>energia_kwh</th>
+      <th>sensor_A</th>
+      <th>sensor_B</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2023-01-01</td>
+      <td>NaN</td>
+      <td>60.67</td>
+      <td>0.00</td>
+      <td>99.68</td>
+      <td>527.2</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>51.647</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2023-01-02</td>
+      <td>NaN</td>
+      <td>48.96</td>
+      <td>0.00</td>
+      <td>100.50</td>
+      <td>493.7</td>
+      <td>120.04</td>
+      <td>50.476</td>
+      <td>48.778</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2023-01-03</td>
+      <td>NaN</td>
+      <td>48.73</td>
+      <td>0.00</td>
+      <td>100.86</td>
+      <td>487.7</td>
+      <td>119.11</td>
+      <td>52.349</td>
+      <td>48.953</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2023-01-04</td>
+      <td>NaN</td>
+      <td>57.13</td>
+      <td>0.00</td>
+      <td>101.74</td>
+      <td>512.8</td>
+      <td>120.71</td>
+      <td>NaN</td>
+      <td>49.383</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2023-01-05</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>2.79</td>
+      <td>101.77</td>
+      <td>477.4</td>
+      <td>119.39</td>
+      <td>NaN</td>
+      <td>46.964</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Se muestran las últimas filas del DataFrame.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">tail</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>fecha</th>
+      <th>temperatura</th>
+      <th>humedad</th>
+      <th>lluvia_mm</th>
+      <th>precio</th>
+      <th>ventas</th>
+      <th>energia_kwh</th>
+      <th>sensor_A</th>
+      <th>sensor_B</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>726</th>
+      <td>2024-12-27</td>
+      <td>22.42</td>
+      <td>NaN</td>
+      <td>0.00</td>
+      <td>109.78</td>
+      <td>584.7</td>
+      <td>155.87</td>
+      <td>58.668</td>
+      <td>56.905</td>
+    </tr>
+    <tr>
+      <th>727</th>
+      <td>2024-12-28</td>
+      <td>18.58</td>
+      <td>NaN</td>
+      <td>0.00</td>
+      <td>110.42</td>
+      <td>579.7</td>
+      <td>159.93</td>
+      <td>58.839</td>
+      <td>58.212</td>
+    </tr>
+    <tr>
+      <th>728</th>
+      <td>2024-12-29</td>
+      <td>17.39</td>
+      <td>NaN</td>
+      <td>3.22</td>
+      <td>NaN</td>
+      <td>552.8</td>
+      <td>160.03</td>
+      <td>NaN</td>
+      <td>61.064</td>
+    </tr>
+    <tr>
+      <th>729</th>
+      <td>2024-12-30</td>
+      <td>20.27</td>
+      <td>NaN</td>
+      <td>0.05</td>
+      <td>109.93</td>
+      <td>590.8</td>
+      <td>154.21</td>
+      <td>59.731</td>
+      <td>60.774</td>
+    </tr>
+    <tr>
+      <th>730</th>
+      <td>2024-12-31</td>
+      <td>16.83</td>
+      <td>NaN</td>
+      <td>2.22</td>
+      <td>109.52</td>
+      <td>616.8</td>
+      <td>160.19</td>
+      <td>61.187</td>
+      <td>61.262</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Se emplea el método <code class="docutils literal notranslate"><span class="pre">df.info()</span></code> para evaluar la estructura y calidad inicial del dataset. Este análisis revela información sobre la composición de los datos, incluyendo el número total de registros (filas) y variables (columnas), los tipos de datos asociados a cada campo (como objetos, enteros o valores flotantes), y la cantidad de valores no nulos por columna.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+RangeIndex: 731 entries, 0 to 730
+Data columns (total 9 columns):
+ #   Column       Non-Null Count  Dtype  
+---  ------       --------------  -----  
+ 0   fecha        731 non-null    object 
+ 1   temperatura  624 non-null    float64
+ 2   humedad      616 non-null    float64
+ 3   lluvia_mm    731 non-null    float64
+ 4   precio       658 non-null    float64
+ 5   ventas       586 non-null    float64
+ 6   energia_kwh  671 non-null    float64
+ 7   sensor_A     612 non-null    float64
+ 8   sensor_B     635 non-null    float64
+dtypes: float64(8), object(1)
+memory usage: 51.5+ KB
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Interpretación</strong></p>
+<p><strong>1. Dimensión del Dataset:</strong></p>
+<ul class="simple">
+<li><p><strong>731 entradas (filas):</strong> El dataset abarca <strong>731 registros</strong> (aproximadamente 2 años de datos diarios).</p></li>
+<li><p><strong>9 columnas:</strong> Variables disponibles para análisis.</p></li>
+</ul>
+<p><strong>2. Problemas Principales Identificados:</strong></p>
+<p><strong>A. Datos Faltantes Significativos:</strong></p>
+<ul class="simple">
+<li><p>La columna <strong><code class="docutils literal notranslate"><span class="pre">ventas</span></code></strong> tiene la mayor de valores faltantes.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">humedad</span></code></strong> y <strong><code class="docutils literal notranslate"><span class="pre">temperatura</span></code></strong> también presentan problemas considerables.</p></li>
+<li><p>Solo <strong><code class="docutils literal notranslate"><span class="pre">fecha</span></code></strong> y <strong><code class="docutils literal notranslate"><span class="pre">lluvia_mm</span></code></strong> están completas al 100%.</p></li>
+</ul>
+<p><strong>B. Tipo de Datos:</strong></p>
+<ul class="simple">
+<li><p>La columna <strong><code class="docutils literal notranslate"><span class="pre">fecha</span></code></strong> está como <code class="docutils literal notranslate"><span class="pre">object</span></code> (debe convertirse a <code class="docutils literal notranslate"><span class="pre">datetime</span></code>)</p></li>
+<li><p>Todas las demás columnas son numéricas (<code class="docutils literal notranslate"><span class="pre">float64</span></code>)</p></li>
+</ul>
+<p><strong>Conclusión:</strong> El dataset tiene una estructura temporal con problemas significativos de datos faltantes que requerirán técnicas robustas de imputación antes de cualquier análisis avanzado.</p>
+<section id="variables-numericas">
+<h3>Variables Númericas<a class="headerlink" href="#variables-numericas" title="Link to this heading">#</a></h3>
+<p>Se genera una tabla resumen de las variables númericas.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>temperatura</th>
+      <th>humedad</th>
+      <th>lluvia_mm</th>
+      <th>precio</th>
+      <th>ventas</th>
+      <th>energia_kwh</th>
+      <th>sensor_A</th>
+      <th>sensor_B</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>624.000000</td>
+      <td>616.000000</td>
+      <td>731.000000</td>
+      <td>658.000000</td>
+      <td>586.000000</td>
+      <td>671.000000</td>
+      <td>612.000000</td>
+      <td>635.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>18.004904</td>
+      <td>59.708506</td>
+      <td>1.754501</td>
+      <td>102.162264</td>
+      <td>544.198464</td>
+      <td>141.981297</td>
+      <td>54.918033</td>
+      <td>53.407631</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>6.639764</td>
+      <td>8.938622</td>
+      <td>1.719964</td>
+      <td>3.374867</td>
+      <td>34.067847</td>
+      <td>11.701740</td>
+      <td>3.288326</td>
+      <td>3.586204</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>4.330000</td>
+      <td>40.610000</td>
+      <td>0.000000</td>
+      <td>94.830000</td>
+      <td>464.900000</td>
+      <td>117.940000</td>
+      <td>46.864000</td>
+      <td>45.033000</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>11.897500</td>
+      <td>51.695000</td>
+      <td>0.000000</td>
+      <td>99.670000</td>
+      <td>517.500000</td>
+      <td>131.500000</td>
+      <td>52.488750</td>
+      <td>50.588500</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>18.070000</td>
+      <td>59.665000</td>
+      <td>1.410000</td>
+      <td>101.975000</td>
+      <td>545.100000</td>
+      <td>141.920000</td>
+      <td>54.953000</td>
+      <td>53.424000</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>24.215000</td>
+      <td>67.520000</td>
+      <td>2.900000</td>
+      <td>104.372500</td>
+      <td>571.050000</td>
+      <td>151.335000</td>
+      <td>57.345250</td>
+      <td>56.113000</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>30.160000</td>
+      <td>77.100000</td>
+      <td>7.650000</td>
+      <td>111.310000</td>
+      <td>642.700000</td>
+      <td>165.080000</td>
+      <td>62.362000</td>
+      <td>61.743000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p><strong>Interpretación</strong></p>
+<p><strong>1. Temperatura</strong></p>
+<ul class="simple">
+<li><p><strong>Rango amplio:</strong> 4.33°C a 30.16°C (amplitud de 25.83°C)</p></li>
+<li><p><strong>Media:</strong> 18.00°C ± 6.64°C (desviación estándar moderada-alta)</p></li>
+<li><p><strong>Distribución:</strong> Aparentemente simétrica (media ≈ mediana = 18.07°C)</p></li>
+</ul>
+<p><strong>2. Humedad</strong></p>
+<ul class="simple">
+<li><p><strong>Rango típico:</strong> 40.61% a 77.10%</p></li>
+<li><p><strong>Media:</strong> 59.71% ± 8.94% (variabilidad moderada)</p></li>
+<li><p><strong>Distribución:</strong> Simétrica (media ≈ mediana = 59.67%)</p></li>
+</ul>
+<p><strong>3. Lluvia (mm)</strong></p>
+<ul class="simple">
+<li><p><strong>Distribución sesgada:</strong> Media (1.75) &gt; Mediana (1.41)</p></li>
+<li><p><strong>Días sin lluvia:</strong> 25% de los días (percentil 25 = 0.0)</p></li>
+<li><p><strong>Eventos extremos:</strong> Máximo de 7.65 mm (posibles tormentas)</p></li>
+</ul>
+<p><strong>4. Precio</strong></p>
+<ul class="simple">
+<li><p><strong>Rango estrecho:</strong> 94.83 a 111.31 (amplitud de 16.48)</p></li>
+<li><p><strong>Estabilidad:</strong> Baja variabilidad (std = 3.37)</p></li>
+<li><p><strong>Distribución:</strong> Simétrica (media ≈ mediana ≈ 102)</p></li>
+</ul>
+<p><strong>5. Ventas</strong></p>
+<ul class="simple">
+<li><p><strong>Rango moderado:</strong> 464.9 a 642.7 (amplitud de 177.8)</p></li>
+<li><p><strong>Variabilidad:</strong> Media 544.20 ± 34.07 (coeficiente de variación: 6.3%)</p></li>
+<li><p><strong>Distribución:</strong> Aparentemente normal (media ≈ mediana)</p></li>
+</ul>
+<p><strong>6. Energía (kWh)</strong></p>
+<ul class="simple">
+<li><p><strong>Consumo estable:</strong> 117.94 a 165.08 kWh</p></li>
+<li><p><strong>Variabilidad moderada:</strong> Media 141.98 ± 11.70</p></li>
+<li><p><strong>Distribución:</strong> Simétrica (media ≈ mediana)</p></li>
+</ul>
+<p><strong>7. Sensores A y B</strong></p>
+<ul class="simple">
+<li><p><strong>Sensor A:</strong> Media 54.92 ± 3.29 (más estable)</p></li>
+<li><p><strong>Sensor B:</strong> Media 53.41 ± 3.59 (ligeramente más variable)</p></li>
+<li><p><strong>Ambos</strong> muestran distribuciones simétricas</p></li>
+</ul>
+</section>
+</section>
+<section id="valores-nulos">
+<h2>Valores Nulos<a class="headerlink" href="#valores-nulos" title="Link to this heading">#</a></h2>
+<p>Para cuantificar la magnitud de datos ausentes en cada columna, se calculó el porcentaje de valores nulos y el conteo de esta manera podemos identificar variables críticas que requieren intervención prioritaria en el proceso de limpieza.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">total</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+<span class="n">null_counts</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="n">null_percent</span> <span class="o">=</span> <span class="p">(</span><span class="n">null_counts</span> <span class="o">/</span> <span class="n">total</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span>
+
+
+<span class="n">missing_summary_2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s2">&quot;Nulos&quot;</span><span class="p">:</span> <span class="n">null_counts</span><span class="p">,</span>
+    <span class="s2">&quot;Porcentaje (%)&quot;</span><span class="p">:</span> <span class="n">null_percent</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="p">})</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== Resumen de valores nulos ===&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">missing_summary_2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== Resumen de valores nulos ===
+             Nulos  Porcentaje (%)
+fecha            0            0.00
+temperatura    107           14.64
+humedad        115           15.73
+lluvia_mm        0            0.00
+precio          73            9.99
+ventas         145           19.84
+energia_kwh     60            8.21
+sensor_A       119           16.28
+sensor_B        96           13.13
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Interpretación</strong></p>
+<p><strong>Variables Completas (0% nulos):</strong></p>
+<ul class="simple">
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">fecha</span></code></strong>: 0% - Columna temporal completa (esencial para análisis de series de tiempo)</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">lluvia_mm</span></code></strong>: 0% - Registro pluviométrico completo, variable confiable</p></li>
+</ul>
+<p><strong>Nulos Moderados (8-13%):</strong></p>
+<ul class="simple">
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">energia_kwh</span></code></strong>: 8.21% (60 nulos) - <strong>Menor problema</strong></p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">sensor_B</span></code></strong>: 13.13% (96 nulos) - Moderado</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">precio</span></code></strong>: 9.99% (73 nulos) - Moderado</p></li>
+</ul>
+<p><strong>Nulos Severos (14-16%):</strong></p>
+<ul class="simple">
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">temperatura</span></code></strong>: 14.64% (107 nulos) - Problema significativo</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">humedad</span></code></strong>: 15.73% (115 nulos) - Problema significativo</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">sensor_A</span></code></strong>: 16.28% (119 nulos) - <strong>Problema grave</strong></p></li>
+</ul>
+<p><strong>Nulos Críticos (&gt;19%):</strong></p>
+<ul class="simple">
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">ventas</span></code></strong>: 19.84% (145 nulos) - <strong>Variable más crítica</strong>, casi 1 de cada 5 registros faltante</p></li>
+</ul>
+<p><strong>Conclusión:</strong>
+El dataset requiere <strong>procesamiento robusto de valores faltantes</strong> antes de cualquier análisis, con especial atención a las variables de ventas y sensores que presentan los mayores problemas de completitud.</p>
+<section id="grafico-de-barras-de-los-valores-nulos">
+<h3>Gráfico de Barras de los Valores Nulos<a class="headerlink" href="#grafico-de-barras-de-los-valores-nulos" title="Link to this heading">#</a></h3>
+<p>Este gráfico visualiza el porcentaje de datos faltantes en cada variable del dataset, permitiendo identificar de un vistazo las columnas que requieren mayor atención en el proceso de limpieza de datos.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">missing_vars_2</span> <span class="o">=</span> <span class="n">missing_summary_2</span><span class="p">[</span><span class="n">missing_summary_2</span><span class="p">[</span><span class="s2">&quot;Nulos&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">]</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
+<span class="n">bars</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">barplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">missing_vars_2</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">missing_vars_2</span><span class="p">[</span><span class="s2">&quot;Porcentaje (%)&quot;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Porcentaje de Nulos por Variable&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Porcentaje (%)&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Variables&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">95</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s2">&quot;right&quot;</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">bar</span> <span class="ow">in</span> <span class="n">bars</span><span class="o">.</span><span class="n">patches</span><span class="p">:</span>
+    <span class="n">yval</span> <span class="o">=</span> <span class="n">bar</span><span class="o">.</span><span class="n">get_height</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">bar</span><span class="o">.</span><span class="n">get_x</span><span class="p">()</span> <span class="o">+</span> <span class="n">bar</span><span class="o">.</span><span class="n">get_width</span><span class="p">()</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">yval</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">yval</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">%&#39;</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s1">&#39;bottom&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/69a31279bec41e24e16d77c2e4106295d58747bf33e8a298bae179f11768c9e8.png" src="_images/69a31279bec41e24e16d77c2e4106295d58747bf33e8a298bae179f11768c9e8.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="metodos-de-imputacion-para-series-de-tiempo-investigacion">
+<h2>Métodos de imputación para series de Tiempo (Investigación)<a class="headerlink" href="#metodos-de-imputacion-para-series-de-tiempo-investigacion" title="Link to this heading">#</a></h2>
+<p>La imputación de datos faltantes es un paso crítico en el preprocesamiento de series de tiempo. La elección del método adecuado depende de la naturaleza de los datos (tendencia, estacionalidad, patrón de missingness) y el objetivo del análisis. A continuación, se presenta una clasificación y descripción de los métodos más comunes.</p>
+<section id="metodos-simples-basados-en-vecindad">
+<h3>1. Métodos Simples (Basados en Vecindad)<a class="headerlink" href="#metodos-simples-basados-en-vecindad" title="Link to this heading">#</a></h3>
+<p>Estos métodos son intuitivos y de rápida implementación, ideales para una primera aproximación o cuando el patrón de datos faltantes es pequeño.</p>
+<section id="forward-fill-locf-last-observation-carried-forward">
+<h4><strong>Forward Fill (LOCF - Last Observation Carried Forward)</strong><a class="headerlink" href="#forward-fill-locf-last-observation-carried-forward" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p><strong>¿Qué es?</strong> Imputa un valor faltante con el <strong>último valor válido observado</strong> inmediatamente anterior en la serie.</p></li>
+<li><p><strong>¿Cuándo usarlo?</strong> Es apropiado cuando se asume que el valor de la variable se mantiene constante hasta la próxima medición. Ejemplos típicos incluyen: lecturas de sensores que se actualizan solo al cambiar, el precio de una acción entre transacciones o el nivel de inventario.</p></li>
+<li><p><strong>Ventajas:</strong> Extremadamente simple y rápido de calcular. Preserva el último valor conocido.</p></li>
+<li><p><strong>Desventajas:</strong> Puede subestimar la variabilidad real de los datos y aplanar tendencias. Introduce un sesgo a la baja (o al alza) si la serie tiene una tendencia clara. No es recomendable para brechas largas de datos faltantes.</p></li>
+</ul>
+</section>
+<section id="backward-fill-nocb-next-observation-carried-backward">
+<h4><strong>Backward Fill (NOCB - Next Observation Carried Backward)</strong><a class="headerlink" href="#backward-fill-nocb-next-observation-carried-backward" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p><strong>¿Qué es?</strong> El opuesto a Forward Fill. Imputa un valor faltante con el <strong>próximo valor válido observado</strong> inmediatamente posterior en la serie.</p></li>
+<li><p><strong>¿Cuándo usarlo?</strong> Su uso es menos común, pero puede aplicarse en contextos donde un evento futuro “explica” el valor pasado, como en registros que se completan de forma retrospectiva.</p></li>
+<li><p><strong>Desventajas:</strong> Su mayor limitación es que <strong>utiliza información del futuro</strong> para imputar el pasado, lo que genera “fugas de datos” (<em>data leakage</em>) y hace que el conjunto de datos sea inválido para entrenar modelos predictivos, ya estos no tendrían acceso a esa información futura en tiempo real.</p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="metodos-de-interpolacion">
+<h3>2. Métodos de Interpolación<a class="headerlink" href="#metodos-de-interpolacion" title="Link to this heading">#</a></h3>
+<p>Los métodos de interpolación intentan estimar los valores faltantes modelando la trayectoria entre los puntos de datos conocidos, siendo más sofisticados que los métodos simples.</p>
+<section id="interpolacion-lineal">
+<h4><strong>Interpolación Lineal</strong><a class="headerlink" href="#interpolacion-lineal" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p><strong>¿Qué es?</strong> Conecta dos puntos de datos conocidos (anterior y posterior al faltante) con una línea recta y toma el valor de esa línea en el punto faltante.</p></li>
+<li><p><strong>¿Cuándo usarlo?</strong> Es efectivo cuando se presume que la serie tiene un comportamiento lineal entre observaciones. Es un buen equilibrio entre simplicidad y rendimiento.</p></li>
+<li><p><strong>Desventajas:</strong> No captura tendencias no lineales, estacionalidad o patrones complejos.</p></li>
+</ul>
+</section>
+<section id="interpolacion-polinomial">
+<h4><strong>Interpolación Polinomial</strong><a class="headerlink" href="#interpolacion-polinomial" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p><strong>¿Qué es?</strong> Ajusta un polinomio de grado <code class="docutils literal notranslate"><span class="pre">n</span></code> (e.g., cuadrático, cúbico) a los puntos de datos adyacentes para estimar el valor faltante.</p></li>
+<li><p><strong>¿Cuándo usarlo?</strong> Útil para series con un comportamiento curvilíneo pronunciado entre los puntos de referencia.</p></li>
+<li><p><strong>Desventajas:</strong> Puede ser muy propenso al <strong>sobreajuste</strong> (<em>overfitting</em>), especialmente con polinomios de alto grado, generando oscilaciones poco realistas.</p></li>
+</ul>
+</section>
+<section id="interpolacion-por-spline-cubico">
+<h4><strong>Interpolación por Spline Cúbico</strong><a class="headerlink" href="#interpolacion-por-spline-cubico" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p><strong>¿Qué es?</strong> Un método avanzado que ajusta una serie de polinomios cúbicos individuales (suaves y diferenciables) a cada segmento de la serie entre puntos conocidos, asegurando que la curva total sea suave.</p></li>
+<li><p><strong>¿Cuándo usarlo?</strong> Ideal para series de tiempo con patrones no lineales y suaves, donde se busca una aproximación más precisa y estéticamente coherente que la interpolación lineal.</p></li>
+<li><p><strong>Desventajas:</strong> Computacionalmente más costosa. Puede tener un comportamiento errático en los extremos (<em>extrapolation</em>) o si los datos tienen mucho ruido.</p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="metodos-estadisticos-y-basados-en-modelos">
+<h3>3. Métodos Estadísticos y basados en Modelos<a class="headerlink" href="#metodos-estadisticos-y-basados-en-modelos" title="Link to this heading">#</a></h3>
+<p>Estos enfoques utilizan la estructura inherente de los datos (como la tendencia o estacionalidad) para realizar imputaciones más robustas.</p>
+<section id="imputacion-con-media-mediana-movil">
+<h4><strong>Imputación con Media/Mediana Móvil</strong><a class="headerlink" href="#imputacion-con-media-mediana-movil" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p><strong>¿Qué es?</strong> Rellena el valor faltante con la media o mediana de una ventana de <code class="docutils literal notranslate"><span class="pre">k</span></code> observaciones anteriores (o centrada) alrededor del punto faltante.</p></li>
+<li><p><strong>¿Cuándo usarlo?</strong> Ayuda a suavizar el ruido y es simple de implementar. La mediana es robusta a outliers.</p></li>
+<li><p><strong>Desventajas:</strong> Introduce un ligero retraso (<em>lag</em>) y suaviza la serie, reduciendo la variabilidad real. Al igual que Backward Fill, una ventana centrada usa información futura.</p></li>
+</ul>
+</section>
+<section id="interpolacion-estacional">
+<h4><strong>Interpolación Estacional</strong><a class="headerlink" href="#interpolacion-estacional" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p><strong>¿Qué es?</strong> Imputa el valor faltante basándose en el patrón estacional de la serie. Por ejemplo, para un dato faltante a las 3 PM de un día, se usa el promedio de los valores a las 3 PM de los días anteriores o de la misma semana.</p></li>
+<li><p><strong>¿Cuándo usarlo?</strong> Es <strong>extremadamente útil y preciso</strong> para series con una fuerte componente estacional (diaria, semanal, anual), como la demanda de energía eléctrica, el tráfico web o las temperaturas.</p></li>
+<li><p><strong>Desventajas:</strong> Requiere que se identifique y defina correctamente el período estacional de la serie.</p></li>
+</ul>
+</section>
+<section id="imputacion-basada-en-modelos-arima-prophet-etc">
+<h4><strong>Imputación basada en Modelos (ARIMA, Prophet, etc.)</strong><a class="headerlink" href="#imputacion-basada-en-modelos-arima-prophet-etc" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p><strong>¿Qué es?</strong> Utiliza modelos predictivos de series de tiempo (como ARIMA, Exponential Smoothing o Prophet) entrenados con los datos disponibles para predecir (imputar) los valores faltantes.</p></li>
+<li><p><strong>¿Cuándo usarlo?</strong> Para problemas complejos con grandes brechas de datos, tendencias no lineales y múltiples estacionalidades. Es uno de los métodos más potentes y precisos.</p></li>
+<li><p><strong>Desventajas:</strong> Computacionalmente intensivo. Requiere amplio conocimiento para seleccionar, configurar y validar el modelo correcto. Existe el riesgo de sobreajuste si no se regulariza adecuadamente.</p></li>
+</ul>
+</section>
+</section>
+<section id="conclusion">
+<h3><strong>Conclusión</strong><a class="headerlink" href="#conclusion" title="Link to this heading">#</a></h3>
+<p>No existe un único método óptimo para todos los casos. La selección debe basarse en un análisis exploratorio de la serie (para identificar tendencia, estacionalidad y el patrón de datos faltantes) y en la naturaleza del problema. Lo recomendado es probar varios métodos y evaluar su impacto en el análisis o modelo final mediante técnicas de validación. Para los casos más críticos, los métodos basados en modelos suelen ofrecer los mejores resultados.</p>
+</section>
+</section>
+<section id="id1">
+<h2><strong>Forward Fill (LOCF - Last Observation Carried Forward)</strong><a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
+<p>Para evaluar la efectividad de la imputación, primero es necesario preparar el DataFrame estableciendo la columna de fecha como índice y luego aplicar el método Forward Fill a las variables numéricas seleccionadas. El siguiente código realiza este proceso y verifica que no queden valores nulos.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">plotly.subplots</span><span class="w"> </span><span class="kn">import</span> <span class="n">make_subplots</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;fecha&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;fecha&#39;</span><span class="p">])</span>
+<span class="n">df</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;fecha&#39;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">variables_a_imputar</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;temperatura&#39;</span><span class="p">,</span> <span class="s1">&#39;humedad&#39;</span><span class="p">,</span> <span class="s1">&#39;precio&#39;</span><span class="p">,</span> <span class="s1">&#39;ventas&#39;</span><span class="p">,</span> <span class="s1">&#39;energia_kwh&#39;</span><span class="p">,</span> <span class="s1">&#39;sensor_A&#39;</span><span class="p">,</span> <span class="s1">&#39;sensor_B&#39;</span><span class="p">]</span>
+
+<span class="n">df_imputado</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+<span class="n">df_imputado</span><span class="p">[</span><span class="n">variables_a_imputar</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_imputado</span><span class="p">[</span><span class="n">variables_a_imputar</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s1">&#39;ffill&#39;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Valores nulos después de la imputación con Forward Fill:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df_imputado</span><span class="p">[</span><span class="n">variables_a_imputar</span><span class="p">]</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Valores nulos después de la imputación con Forward Fill:
+temperatura    7
+humedad        0
+precio         0
+ventas         0
+energia_kwh    1
+sensor_A       1
+sensor_B       0
+dtype: int64
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\david\AppData\Local\Temp\ipykernel_12008\1370628207.py:9: FutureWarning: DataFrame.fillna with &#39;method&#39; is deprecated and will raise in a future version. Use obj.ffill() or obj.bfill() instead.
+  df_imputado[variables_a_imputar] = df_imputado[variables_a_imputar].fillna(method=&#39;ffill&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Una vez aplicada la imputación, es crucial visualizar comparativamente los datos originales con los imputados para evaluar visualmente la calidad del método. El siguiente código genera una matriz de subgráficos que permite comparar cada variable antes y después del proceso de imputación.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">make_subplots</span><span class="p">(</span><span class="n">rows</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">variables_a_imputar</span><span class="p">),</span> <span class="n">cols</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+                    <span class="n">subplot_titles</span><span class="o">=</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">var</span><span class="si">}</span><span class="s1"> (Original)&#39;</span> <span class="k">for</span> <span class="n">var</span> <span class="ow">in</span> <span class="n">variables_a_imputar</span><span class="p">]</span> <span class="o">+</span>
+                                   <span class="p">[</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">var</span><span class="si">}</span><span class="s1"> (Imputado)&#39;</span> <span class="k">for</span> <span class="n">var</span> <span class="ow">in</span> <span class="n">variables_a_imputar</span><span class="p">],</span>
+                    <span class="n">horizontal_spacing</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">vertical_spacing</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span>
+                    <span class="n">shared_xaxes</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">var</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">variables_a_imputar</span><span class="p">):</span>
+
+    <span class="n">fig</span><span class="o">.</span><span class="n">add_trace</span><span class="p">(</span><span class="n">go</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="n">var</span><span class="p">],</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;lines&#39;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Original: </span><span class="si">{</span><span class="n">var</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">),</span>
+                  <span class="n">row</span><span class="o">=</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="n">fig</span><span class="o">.</span><span class="n">add_trace</span><span class="p">(</span><span class="n">go</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">df_imputado</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">df_imputado</span><span class="p">[</span><span class="n">var</span><span class="p">],</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;lines&#39;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Imputado: </span><span class="si">{</span><span class="n">var</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">),</span>
+                  <span class="n">row</span><span class="o">=</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span><span class="n">height</span><span class="o">=</span><span class="mi">400</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">variables_a_imputar</span><span class="p">),</span> <span class="n">showlegend</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                  <span class="n">title_text</span><span class="o">=</span><span class="s2">&quot;Comparación de Series de Tiempo: Original vs. Imputada con Forward Fill&quot;</span><span class="p">,</span>
+                  <span class="n">template</span><span class="o">=</span><span class="s1">&#39;plotly_white&#39;</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+</div>
+</div>
+</section>
+<section id="id2">
+<h2><strong>Backward Fill (NOCB - Next Observation Carried Backward)</strong><a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<p>Para comparar la efectividad de diferentes métodos de imputación, se procede a aplicar la técnica de Backward Fill (NOCB) al mismo conjunto de variables. Este método propaga el siguiente valor válido observado hacia atrás para llenar los huecos.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">plotly.subplots</span><span class="w"> </span><span class="kn">import</span> <span class="n">make_subplots</span>
+
+<span class="n">variables_a_imputar</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;temperatura&#39;</span><span class="p">,</span> <span class="s1">&#39;humedad&#39;</span><span class="p">,</span> <span class="s1">&#39;precio&#39;</span><span class="p">,</span> <span class="s1">&#39;ventas&#39;</span><span class="p">,</span> <span class="s1">&#39;energia_kwh&#39;</span><span class="p">,</span> <span class="s1">&#39;sensor_A&#39;</span><span class="p">,</span> <span class="s1">&#39;sensor_B&#39;</span><span class="p">]</span>
+
+<span class="n">df_bfill</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+<span class="n">df_bfill</span><span class="p">[</span><span class="n">variables_a_imputar</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_bfill</span><span class="p">[</span><span class="n">variables_a_imputar</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s1">&#39;bfill&#39;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Resumen de valores nulos después de la imputación con Backward Fill:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df_bfill</span><span class="p">[</span><span class="n">variables_a_imputar</span><span class="p">]</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resumen de valores nulos después de la imputación con Backward Fill:
+temperatura    0
+humedad        7
+precio         0
+ventas         0
+energia_kwh    0
+sensor_A       0
+sensor_B       0
+dtype: int64
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\david\AppData\Local\Temp\ipykernel_12008\1028864607.py:7: FutureWarning:
+
+DataFrame.fillna with &#39;method&#39; is deprecated and will raise in a future version. Use obj.ffill() or obj.bfill() instead.
+</pre></div>
+</div>
+</div>
+</div>
+<p>Una vez aplicada la imputación, es crucial visualizar comparativamente los datos originales con los imputados para evaluar visualmente la calidad del método. El siguiente código genera una matriz de subgráficos que permite comparar cada variable antes y después del proceso de imputación.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">make_subplots</span><span class="p">(</span><span class="n">rows</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">variables_a_imputar</span><span class="p">),</span> <span class="n">cols</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+                    <span class="n">subplot_titles</span><span class="o">=</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">var</span><span class="si">}</span><span class="s1"> (Original)&#39;</span> <span class="k">for</span> <span class="n">var</span> <span class="ow">in</span> <span class="n">variables_a_imputar</span><span class="p">]</span> <span class="o">+</span>
+                                   <span class="p">[</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">var</span><span class="si">}</span><span class="s1"> (Imputado)&#39;</span> <span class="k">for</span> <span class="n">var</span> <span class="ow">in</span> <span class="n">variables_a_imputar</span><span class="p">],</span>
+                    <span class="n">horizontal_spacing</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">vertical_spacing</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span>
+                    <span class="n">shared_xaxes</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">var</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">variables_a_imputar</span><span class="p">):</span>
+
+    <span class="n">fig</span><span class="o">.</span><span class="n">add_trace</span><span class="p">(</span><span class="n">go</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="n">var</span><span class="p">],</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;lines&#39;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Original: </span><span class="si">{</span><span class="n">var</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">),</span>
+                  <span class="n">row</span><span class="o">=</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+
+    <span class="n">fig</span><span class="o">.</span><span class="n">add_trace</span><span class="p">(</span><span class="n">go</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">df_bfill</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">df_bfill</span><span class="p">[</span><span class="n">var</span><span class="p">],</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;lines&#39;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Imputado: </span><span class="si">{</span><span class="n">var</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">),</span>
+                  <span class="n">row</span><span class="o">=</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span><span class="n">height</span><span class="o">=</span><span class="mi">400</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">variables_a_imputar</span><span class="p">),</span> <span class="n">showlegend</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                  <span class="n">title_text</span><span class="o">=</span><span class="s2">&quot;Comparación de Series de Tiempo: Original vs. Imputada con Backward Fill&quot;</span><span class="p">,</span>
+                  <span class="n">template</span><span class="o">=</span><span class="s1">&#39;plotly_white&#39;</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+</div>
+</div>
+</section>
+<section id="id3">
+<h2><strong>Interpolación Lineal</strong><a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
+<p>Para mejorar la precisión de la imputación capturando la tendencia entre puntos de datos adyacentes, se aplica el método de interpolación lineal. Esta técnica calcula valores intermedios a lo largo de una línea recta entre observaciones conocidas, proporcionando una estimación más suave que los métodos de forward/backward fill.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">plotly.subplots</span><span class="w"> </span><span class="kn">import</span> <span class="n">make_subplots</span>
+
+<span class="n">variables_a_imputar</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;temperatura&#39;</span><span class="p">,</span> <span class="s1">&#39;humedad&#39;</span><span class="p">,</span> <span class="s1">&#39;precio&#39;</span><span class="p">,</span> <span class="s1">&#39;ventas&#39;</span><span class="p">,</span> <span class="s1">&#39;energia_kwh&#39;</span><span class="p">,</span> <span class="s1">&#39;sensor_A&#39;</span><span class="p">,</span> <span class="s1">&#39;sensor_B&#39;</span><span class="p">]</span>
+
+<span class="n">df_interpolado</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+<span class="n">df_interpolado</span><span class="p">[</span><span class="n">variables_a_imputar</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_interpolado</span><span class="p">[</span><span class="n">variables_a_imputar</span><span class="p">]</span><span class="o">.</span><span class="n">interpolate</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s1">&#39;linear&#39;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Resumen de valores nulos después de la imputación con Interpolación Lineal:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df_interpolado</span><span class="p">[</span><span class="n">variables_a_imputar</span><span class="p">]</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resumen de valores nulos después de la imputación con Interpolación Lineal:
+temperatura    7
+humedad        0
+precio         0
+ventas         0
+energia_kwh    1
+sensor_A       1
+sensor_B       0
+dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+<p>Una vez aplicada la imputación, es crucial visualizar comparativamente los datos originales con los imputados para evaluar visualmente la calidad del método. El siguiente código genera una matriz de subgráficos que permite comparar cada variable antes y después del proceso de imputación.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">make_subplots</span><span class="p">(</span><span class="n">rows</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">variables_a_imputar</span><span class="p">),</span> <span class="n">cols</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+                    <span class="n">subplot_titles</span><span class="o">=</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">var</span><span class="si">}</span><span class="s1"> (Original)&#39;</span> <span class="k">for</span> <span class="n">var</span> <span class="ow">in</span> <span class="n">variables_a_imputar</span><span class="p">]</span> <span class="o">+</span>
+                                   <span class="p">[</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">var</span><span class="si">}</span><span class="s1"> (Imputado)&#39;</span> <span class="k">for</span> <span class="n">var</span> <span class="ow">in</span> <span class="n">variables_a_imputar</span><span class="p">],</span>
+                    <span class="n">horizontal_spacing</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">vertical_spacing</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span>
+                    <span class="n">shared_xaxes</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">var</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">variables_a_imputar</span><span class="p">):</span>
+
+    <span class="n">fig</span><span class="o">.</span><span class="n">add_trace</span><span class="p">(</span><span class="n">go</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="n">var</span><span class="p">],</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;lines&#39;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Original: </span><span class="si">{</span><span class="n">var</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">),</span>
+                  <span class="n">row</span><span class="o">=</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="n">fig</span><span class="o">.</span><span class="n">add_trace</span><span class="p">(</span><span class="n">go</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">df_interpolado</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">df_interpolado</span><span class="p">[</span><span class="n">var</span><span class="p">],</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;lines&#39;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Imputado: </span><span class="si">{</span><span class="n">var</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">),</span>
+                  <span class="n">row</span><span class="o">=</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span><span class="n">height</span><span class="o">=</span><span class="mi">400</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">variables_a_imputar</span><span class="p">),</span> <span class="n">showlegend</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                  <span class="n">title_text</span><span class="o">=</span><span class="s2">&quot;Comparación de Series de Tiempo: Original vs. Imputada con Interpolación Lineal&quot;</span><span class="p">,</span>
+                  <span class="n">template</span><span class="o">=</span><span class="s1">&#39;plotly_white&#39;</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+</div>
+</div>
+</section>
+<section id="forward-fill-y-backward-fill-combinados">
+<h2><strong>Forward Fill y Backward Fill Combinados</strong><a class="headerlink" href="#forward-fill-y-backward-fill-combinados" title="Link to this heading">#</a></h2>
+<p>Para garantizar la eliminación completa de todos los valores nulos, se implementa una estrategia combinada que aplica primero Forward Fill (para propagar los últimos valores válidos hacia adelante) y luego Backward Fill (para cubrir los valores restantes al inicio de la serie con los primeros valores disponibles). Este enfoque asegura un dataset completamente imputado.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">variables_a_imputar</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;temperatura&#39;</span><span class="p">,</span> <span class="s1">&#39;humedad&#39;</span><span class="p">,</span> <span class="s1">&#39;precio&#39;</span><span class="p">,</span> <span class="s1">&#39;ventas&#39;</span><span class="p">,</span> <span class="s1">&#39;energia_kwh&#39;</span><span class="p">,</span> <span class="s1">&#39;sensor_A&#39;</span><span class="p">,</span> <span class="s1">&#39;sensor_B&#39;</span><span class="p">]</span>
+
+<span class="n">df_final_imputado</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+<span class="n">df_final_imputado</span><span class="p">[</span><span class="n">variables_a_imputar</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_final_imputado</span><span class="p">[</span><span class="n">variables_a_imputar</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s1">&#39;ffill&#39;</span><span class="p">)</span>
+
+<span class="n">df_final_imputado</span><span class="p">[</span><span class="n">variables_a_imputar</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_final_imputado</span><span class="p">[</span><span class="n">variables_a_imputar</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s1">&#39;bfill&#39;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Valores nulos después de la imputación combinada (ffill y bfill):&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df_final_imputado</span><span class="p">[</span><span class="n">variables_a_imputar</span><span class="p">]</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Valores nulos después de la imputación combinada (ffill y bfill):
+temperatura    0
+humedad        0
+precio         0
+ventas         0
+energia_kwh    0
+sensor_A       0
+sensor_B       0
+dtype: int64
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\david\AppData\Local\Temp\ipykernel_12008\1245326820.py:5: FutureWarning:
+
+DataFrame.fillna with &#39;method&#39; is deprecated and will raise in a future version. Use obj.ffill() or obj.bfill() instead.
+
+C:\Users\david\AppData\Local\Temp\ipykernel_12008\1245326820.py:7: FutureWarning:
+
+DataFrame.fillna with &#39;method&#39; is deprecated and will raise in a future version. Use obj.ffill() or obj.bfill() instead.
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="markdown.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Markdown Files</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="markdown-notebooks.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Notebooks with MyST Markdown</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#importar-librerias">Importar Librerías</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lectura-de-datos">Lectura de Datos</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variables-numericas">Variables Númericas</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#valores-nulos">Valores Nulos</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#grafico-de-barras-de-los-valores-nulos">Gráfico de Barras de los Valores Nulos</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodos-de-imputacion-para-series-de-tiempo-investigacion">Métodos de imputación para series de Tiempo (Investigación)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#metodos-simples-basados-en-vecindad">1. Métodos Simples (Basados en Vecindad)</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#forward-fill-locf-last-observation-carried-forward"><strong>Forward Fill (LOCF - Last Observation Carried Forward)</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#backward-fill-nocb-next-observation-carried-backward"><strong>Backward Fill (NOCB - Next Observation Carried Backward)</strong></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#metodos-de-interpolacion">2. Métodos de Interpolación</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#interpolacion-lineal"><strong>Interpolación Lineal</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#interpolacion-polinomial"><strong>Interpolación Polinomial</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#interpolacion-por-spline-cubico"><strong>Interpolación por Spline Cúbico</strong></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#metodos-estadisticos-y-basados-en-modelos">3. Métodos Estadísticos y basados en Modelos</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#imputacion-con-media-mediana-movil"><strong>Imputación con Media/Mediana Móvil</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#interpolacion-estacional"><strong>Interpolación Estacional</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#imputacion-basada-en-modelos-arima-prophet-etc"><strong>Imputación basada en Modelos (ARIMA, Prophet, etc.)</strong></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion"><strong>Conclusión</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1"><strong>Forward Fill (LOCF - Last Observation Carried Forward)</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2"><strong>Backward Fill (NOCB - Next Observation Carried Backward)</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3"><strong>Interpolación Lineal</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#forward-fill-y-backward-fill-combinados"><strong>Forward Fill y Backward Fill Combinados</strong></a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The Jupyter Book Community
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
